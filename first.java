@@ -1,0 +1,8 @@
+class first
+{
+    public static void main(String args[])
+    {
+        System.out.print("Hello world with java\n");
+        System.out.print("Hello world with java\n");
+    }
+}
