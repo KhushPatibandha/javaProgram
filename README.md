@@ -1,3 +1,3 @@
 # javaProgram
 
-These are all my java programs
+These are all my java programs.
