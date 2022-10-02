@@ -10,8 +10,9 @@ public class problem30
         if(n == 1)
         {
             System.out.println("Transfer disk "+ n +" from "+ src +" to "+ dest);
-            return;
+            return;        
         }
+
         towerOfHanoi(n-1, src, dest, helper);
         System.out.println("Transfer disk "+ n +" from "+ src +" to "+ dest);
         towerOfHanoi(n-1, helper, src, dest);
@@ -20,6 +21,5 @@ public class problem30
     {
         int n = 3;
         towerOfHanoi(n, "S", "H", "D");
-    }   
+    }  
 }
-
