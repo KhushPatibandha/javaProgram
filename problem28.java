@@ -20,5 +20,5 @@ public class problem28
     public static void main(String[] args) 
     {
         System.out.println(printPower(5, 2));
-    }    
+    }   
 }

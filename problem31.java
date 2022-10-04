@@ -11,7 +11,6 @@ public class problem31
             System.out.println(str.charAt(idx));
             return;
         }
-
         System.out.print(str.charAt(idx));
         printRev(str, idx-1);
     }
@@ -19,5 +18,5 @@ public class problem31
     {
         String str = "abcd";
         printRev(str, str.length()-1);
-    }    
+    }   
 }

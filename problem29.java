@@ -18,7 +18,7 @@ public class problem29
         // if n is even
         if(n % 2 == 0)
         {
-            return printPower(x, n/2) * printPower(x, n/2); 
+            return printPower(x, n/2) * printPower(x, n/2);
         }
 
         // if n is odd 
