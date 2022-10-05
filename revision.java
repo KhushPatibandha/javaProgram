@@ -1,19 +1,18 @@
 public class revision 
 {
-    public static void towerOfHanoi(int n, String src, String helper, String dest)
+    public static void printRev(String str, int idx)
     {
-        if(n == 1)
+        if(idx == 0)
         {
-            System.out.println("Transfer disk "+ n +" from "+ src +" to "+ dest);
+            System.out.println(str.charAt(idx));
             return;
         }
-        towerOfHanoi(n-1, src, dest, helper);
-        System.out.println("Transfer disk "+ n +" from "+ src +" to "+ dest);
-        towerOfHanoi(n-1, helper, src, dest);
+        System.out.print(str.charAt(idx));
+        printRev(str, idx-1);
     }
     public static void main(String[] args) 
     {
-        int n = 3;
-        towerOfHanoi(n, "S", "H", "D");
+        String str = "abcd";
+        printRev(str, str.length()-1);
     }    
 }
