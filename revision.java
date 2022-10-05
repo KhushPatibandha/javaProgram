@@ -1,33 +1,20 @@
 public class revision 
 {
-    public static int first = -1;
-    public static int last = -1;
-
-    public static void findOccurance(String str, int idx, char element)
+    public static boolean isSorted(int arr[], int idx)
     {
-        if(idx == str.length())
+        if(idx == arr.length-1)
         {
-            System.out.println(first);
-            System.out.println(last);
-            return;
+            return true;
         }
-        char currChar = str.charAt(idx);
-        if(currChar == element)
+        if(arr[idx] >= arr[idx+1])
         {
-            if(first == -1)
-            {
-                first = idx;
-            }
-            else
-            {
-                last = idx;
-            }
+            return false;
         }
-        findOccurance(str, idx+1, element);
+        return isSorted(arr, idx+1);
     }
     public static void main(String[] args) 
     {
-        String str = "abaacdaefaah";
-        findOccurance(str, 0, 'a');
-    }  
+        int arr[] = {1,3,5};
+        System.out.println(isSorted(arr, 0));
+    }
 }
