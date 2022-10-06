@@ -1,20 +1,31 @@
 public class revision 
 {
-    public static boolean isSorted(int arr[], int idx)
+    public static void moveAllX(String str, int idx, int count, String newString)
     {
-        if(idx == arr.length-1)
+        if(idx == str.length())
         {
-            return true;
+            for(int i = 0; i < count; i++)
+            {
+                newString += 'x';
+            }
+            System.out.println(newString);
+            return;
         }
-        if(arr[idx] >= arr[idx+1])
+        char currChar = str.charAt(idx);
+        if(currChar == 'x')
         {
-            return false;
+            count++;
+            moveAllX(str, idx+1, count, newString);
         }
-        return isSorted(arr, idx+1);
+        else
+        {
+            newString += currChar;
+            moveAllX(str, idx+1, count, newString);
+        }
     }
     public static void main(String[] args) 
     {
-        int arr[] = {1,3,5};
-        System.out.println(isSorted(arr, 0));
+        String str = "axbcxxd";
+        moveAllX(str, 0, 0, "");
     }
 }
