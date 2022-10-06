@@ -1,31 +1,30 @@
 public class revision 
 {
-    public static void moveAllX(String str, int idx, int count, String newString)
+    public static boolean[] map = new boolean[26];
+
+    public static void removeDuplicates(String str, int idx, String newString)
     {
         if(idx == str.length())
         {
-            for(int i = 0; i < count; i++)
-            {
-                newString += 'x';
-            }
             System.out.println(newString);
             return;
         }
         char currChar = str.charAt(idx);
-        if(currChar == 'x')
+
+        if(map[currChar - 'a'] == true)
         {
-            count++;
-            moveAllX(str, idx+1, count, newString);
+            removeDuplicates(str, idx+1, newString);
         }
         else
         {
             newString += currChar;
-            moveAllX(str, idx+1, count, newString);
+            map[currChar - 'a'] = true;
+            removeDuplicates(str, idx+1, newString);
         }
     }
     public static void main(String[] args) 
     {
-        String str = "axbcxxd";
-        moveAllX(str, 0, 0, "");
+        String str = "abbccda";
+        removeDuplicates(str, 0, "");
     }
 }
