@@ -1,8 +1,6 @@
 public class revision 
 {
-    public static boolean[] map = new boolean[26];
-
-    public static void removeDuplicates(String str, int idx, String newString)
+    public static void subsequences(String str, int idx, String newString)
     {
         if(idx == str.length())
         {
@@ -11,20 +9,15 @@ public class revision
         }
         char currChar = str.charAt(idx);
 
-        if(map[currChar - 'a'] == true)
-        {
-            removeDuplicates(str, idx+1, newString);
-        }
-        else
-        {
-            newString += currChar;
-            map[currChar - 'a'] = true;
-            removeDuplicates(str, idx+1, newString);
-        }
+        // to be 
+        subsequences(str, idx+1, newString+currChar);
+
+        // not to be
+        subsequences(str, idx+1, newString);
     }
     public static void main(String[] args) 
     {
-        String str = "abbccda";
-        removeDuplicates(str, 0, "");
+        String str = "abc";
+        subsequences(str, 0, "");
     }
 }
