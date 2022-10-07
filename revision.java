@@ -1,27 +1,34 @@
-public class revision 
-{
-    public static String[] keypad = {".", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tu", "vwx", "yz"};
+import java.util.HashSet;
 
-    public static void printComb(String str, int idx, String comebination)
+public class revision 
+{   
+    public static int first = -1;
+    public static int last = -1;
+
+    public static void findOccurance(String str, int idx, char element)
     {
         if(idx == str.length())
         {
-            System.out.println(comebination);
+            System.out.println(first);
+            System.out.println(last);
             return;
         }
         char currChar = str.charAt(idx);
-
-        String mapping = keypad[currChar - '0'];
-
-        for(int i = 0; i < mapping.length(); i++)
+        if(currChar == element)
         {
-            printComb(str, idx+1, comebination+mapping.charAt(i));
+            if(first == -1)
+            {
+                first = idx;
+            }
+            else
+            {
+                last = idx;
+            }
         }
+        findOccurance(str, idx+1, element);
     }
-
     public static void main(String[] args) 
     {
-        String str = "23";
-        printComb(str, 0, "");
+
     }
 }
