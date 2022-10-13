@@ -11,6 +11,7 @@ public class problem42
             System.out.println(perm);
             return;
         }
+        
         for(int i = 0; i < str.length(); i++)
         {
             char currChar = str.charAt(i);
@@ -22,5 +23,5 @@ public class problem42
     {
         String str = "ABC";
         printPermu(str, "", 0);
-    }    
+    }
 }
