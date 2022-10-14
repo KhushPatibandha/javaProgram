@@ -1,107 +1,135 @@
-/* Java program to solve N Queen Problem using
-   backtracking */
-   public class NQueensProblem {
-    final int N = 4;
-  
-    /* A utility function to print solution */
-    void printSolution(int board[][])
+// The N Queens Problem
+// Time complexity = O(n^n)
+// ****************************************************************************
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NQueensProblem 
+{
+    public static boolean isSafe(int row, int col, char[][] board)
     {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++)
-                System.out.print(" " + board[i][j] + " ");
-            System.out.println();
-        }
-    }
-  
-    /* A utility function to check if a queen can
-       be placed on board[row][col]. Note that this
-       function is called when "col" queens are already
-       placeed in columns from 0 to col -1. So we need
-       to check only left side for attacking queens */
-    boolean isSafe(int board[][], int row, int col)
-    {
-        int i, j;
-  
-        /* Check this row on left side */
-        for (i = 0; i < col; i++)
-            if (board[row][i] == 1)
+        // Horizontal
+        for(int j = 0; j < board.length; j++)
+        {
+            if(board[row][j] == 'Q')
+            {
                 return false;
-  
-        /* Check upper diagonal on left side */
-        for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
-            if (board[i][j] == 1)
-                return false;
-  
-        /* Check lower diagonal on left side */
-        for (i = row, j = col; j >= 0 && i < N; i++, j--)
-            if (board[i][j] == 1)
-                return false;
-  
-        return true;
-    }
-  
-    /* A recursive utility function to solve N
-       Queen problem */
-    boolean solveNQUtil(int board[][], int col)
-    {
-        /* base case: If all queens are placed
-           then return true */
-        if (col >= N)
-            return true;
-  
-        /* Consider this column and try placing
-           this queen in all rows one by one */
-        for (int i = 0; i < N; i++) {
-            /* Check if the queen can be placed on
-               board[i][col] */
-            if (isSafe(board, i, col)) {
-                /* Place this queen in board[i][col] */
-                board[i][col] = 1;
-  
-                /* recur to place rest of the queens */
-                if (solveNQUtil(board, col + 1) == true)
-                    return true;
-  
-                /* If placing queen in board[i][col]
-                   doesn't lead to a solution then
-                   remove queen from board[i][col] */
-                board[i][col] = 0; // BACKTRACK
             }
         }
-  
-        /* If the queen can not be placed in any row in
-           this column col, then return false */
-        return false;
-    }
-  
-    /* This function solves the N Queen problem using
-       Backtracking.  It mainly uses solveNQUtil () to
-       solve the problem. It returns false if queens
-       cannot be placed, otherwise, return true and
-       prints placement of queens in the form of 1s.
-       Please note that there may be more than one
-       solutions, this function prints one of the
-       feasible solutions.*/
-    boolean solveNQ()
-    {
-        int board[][] = { { 0, 0, 0, 0 },
-                          { 0, 0, 0, 0 },
-                          { 0, 0, 0, 0 },
-                          { 0, 0, 0, 0 } };
-  
-        if (solveNQUtil(board, 0) == false) {
-            System.out.print("Solution does not exist");
-            return false;
+
+        // Vertical
+        for(int i = 0; i < board[0].length; i++)
+        {
+            if(board[i][col] == 'Q')
+            {
+                return false;
+            }
         }
-  
-        printSolution(board);
+
+        // Upper left
+        int r = row;
+        for(int c = col; c >= 0 && r >= 0; c--, r--)
+        {
+            if(board[r][c] == 'Q')
+            {
+                return false;
+            }
+        }
+
+        // Upper right
+        r = row;
+        for(int c = col; c < board.length && r >= 0; r--, c++)
+        {
+            if(board[r][c] == 'Q')
+            {
+                return false;
+            }
+        }
+
+        // Lower left
+        r = row;
+        for(int c = col; c >= 0 && r < board.length; r++, c--)
+        {
+            if(board[r][c] == 'Q')
+            {
+                return false;
+            }
+        }
+
+        // Lower right 
+        r = row;
+        for(int c = col; c < board.length && r < board.length; c++, r++)
+        {
+            if(board[r][c] == 'Q')
+            {
+                return false;
+            }
+        }
+
         return true;
     }
-  
-    // driver program to test above function
-    public static void main(String args[])
+
+    
+    public static void saveBoard(char[][] board, List<List<String>> allBoard)
     {
-        NQueensProblem Queen = new NQueensProblem();
-        Queen.solveNQ();
+        String row = "";
+        List<String> newBoard = new ArrayList<>();
+
+        for(int i = 0; i < board.length; i++)
+        {
+            row = "";
+
+            for(int j = 0; j < board[0].length; j++)
+            {
+                if(board[i][j] == 'Q')
+                {
+                    row += 'Q';
+                }
+                else
+                {
+                    row += '.';
+                }
+
+            }
+            
+            newBoard.add(row);
+        }
+        
+        allBoard.add(newBoard);
+    }
+
+
+    public static void helper(char[][] board, List<List<String>> allBoard, int col)
+    {
+        if(col == board.length)
+        {
+            saveBoard(board, allBoard);
+            return;
+        }
+
+        for(int row = 0; row < board.length; row++)
+        {
+            if(isSafe(row, col, board))
+            {
+                board[row][col] = 'Q';
+                helper(board, allBoard, col+1);
+                board[row][col] = '.';
+            }
+        }
+    }
+
+
+    public static void main(String[] args) 
+    {
+        int n = 4;
+        
+        List<List<String>> allBoard = new ArrayList<>();
+        char[][] board = new char[n][n];
+
+        helper(board, allBoard, 0);
+        
+        System.out.println(allBoard);
     }
 }
