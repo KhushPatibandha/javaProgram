@@ -20,7 +20,7 @@ public class problem43
         }
 
         // Vertical
-        for(int i = 0; i < board[0].length; i++)
+        for(int i = 0; i < board.length; i++)
         {
             if(board[i][col] == 'Q')
             {
@@ -81,7 +81,7 @@ public class problem43
         {
             row = "";
 
-            for(int j = 0; j < board[0].length; j++)
+            for(int j = 0; j < board.length; j++)
             {
                 if(board[i][j] == 'Q')
                 {

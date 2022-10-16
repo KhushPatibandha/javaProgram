@@ -15,7 +15,7 @@ public class revision
         }
 
         // Vertical
-        for(int i = 0; i < board[0].length; i++)
+        for(int i = 0; i < board.length; i++)
         {
             if(board[i][col] == 'Q')
             {
@@ -23,7 +23,7 @@ public class revision
             }
         }
 
-        // upper left
+        // Upper left
         int r = row;
         for(int c = col; c >= 0 && r >= 0; r--, c--)
         {
@@ -33,7 +33,7 @@ public class revision
             }
         }
 
-        // upper right 
+        // Upper right
         r = row;
         for(int c = col; c < board.length && r >= 0; r--, c++)
         {
@@ -43,7 +43,7 @@ public class revision
             }
         }
 
-        // lower left
+        // Lower left
         r = row;
         for(int c = col; c >= 0 && r < board.length; r++, c--)
         {
@@ -53,7 +53,7 @@ public class revision
             }
         }
 
-        // lower right 
+        // Lower right
         r = row;
         for(int c = col; c < board.length && r < board.length; r++, c++)
         {
@@ -75,7 +75,7 @@ public class revision
         for(int i = 0; i < board.length; i++)
         {
             row = "";
-            for(int j = 0; j < board[0].length; j++)
+            for(int j = 0; j < board.length; j++)
             {
                 if(board[i][j] == 'Q')
                 {
@@ -113,14 +113,15 @@ public class revision
         }
     }
 
+
     public static void main(String[] args) 
     {
         int n = 4;
         
         List<List<String>> allBoard = new ArrayList<>();
         char[][] board = new char[n][n];
-        helper(board, allBoard, 0);
 
+        helper(board, allBoard, 0);
         System.out.println(allBoard);
     }
 }
