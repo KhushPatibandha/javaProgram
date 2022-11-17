@@ -1,3 +1,6 @@
+// floor of a number
+// greatest number <= target
+
 public class problem45 
 {
     static int floor(int arr[], int target)
@@ -30,7 +33,7 @@ public class problem45
     public static void main(String[] args) 
     {
         int arr[] = {2, 3, 5, 9, 14, 16, 18};
-        int ans = floor(arr, 13);
+        int ans = floor(arr, 1);
         System.out.println(ans);
     }    
 }

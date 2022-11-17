@@ -8,6 +8,11 @@ public class problem44
         int start = 0;
         int end = arr.length-1;
 
+        if(target > arr[arr.length-1])
+        {
+            return -1;
+        }
+        
         while(start <= end)
         {
             int mid = start + (end - start)/2;
@@ -33,7 +38,7 @@ public class problem44
     public static void main(String[] args) 
     {
         int arr[] = {2, 3, 5, 9, 14, 16, 18};
-        int ans = ceiling(arr, 13);
+        int ans = ceiling(arr, 19);
         System.out.println(ans);
     }    
 }
