@@ -79,7 +79,7 @@ public class problem47
             return firstTry;
         }
         
-        // try to search in second helf
+        // try to search in second half
         return orderAgnostic(arr, target, peak+1, arr.length-1);
     }
 
@@ -90,5 +90,5 @@ public class problem47
         int target = 3;
 
         System.out.println(search(mountainArr, target));
-    }    
+    }
 }
