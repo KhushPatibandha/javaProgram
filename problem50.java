@@ -1,8 +1,7 @@
-import java.util.Arrays;
-
 // Search in a sorted matrix
 
 
+import java.util.Arrays;
 public class problem50 
 {
     // Search in the row provided between the col provided
