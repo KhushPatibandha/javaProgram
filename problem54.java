@@ -34,6 +34,7 @@ public class problem54
             pathRestrictions(p + 'R', maze, r, c+1);
         }
     }
+    
     public static void main(String[] args) 
     {
         boolean[][] board = {
