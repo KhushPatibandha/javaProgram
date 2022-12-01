@@ -1,127 +1,138 @@
-// Java program for above approach
-public class Sudoku {
- 
-    // N is the size of the 2D matrix   N*N
-    static int N = 9;
- 
-    /* Takes a partially filled-in grid and attempts
-    to assign values to all unassigned locations in
-    such a way to meet the requirements for
-    Sudoku solution (non-duplication across rows,
-    columns, and boxes) */
-    static boolean solveSudoku(int grid[][], int row, int col)
+public class Sudoku 
+{
+    static boolean isSafe(int[][] board, int row, int col, int num)
     {
- 
-        /*if we have reached the 8th
-           row and 9th column (0
-           indexed matrix) ,
-           we are returning true to avoid further
-           backtracking       */
-        if (row == N - 1 && col == N)
-            return true;
- 
-        // Check if column value  becomes 9 ,
-        // we move to next row
-        // and column start from 0
-        if (col == N) {
-            row++;
-            col = 0;
-        }
- 
-        // Check if the current position
-        // of the grid already
-        // contains value >0, we iterate
-        // for next column
-        if (grid[row][col] != 0)
-            return solveSudoku(grid, row, col + 1);
- 
-        for (int num = 1; num < 10; num++) {
- 
-            // Check if it is safe to place
-            // the num (1-9)  in the
-            // given row ,col ->we move to next column
-            if (isSafe(grid, row, col, num)) {
- 
-                /*  assigning the num in the current
-                (row,col)  position of the grid and
-                assuming our assigned num in the position
-                is correct */
-                grid[row][col] = num;
- 
-                // Checking for next
-                // possibility with next column
-                if (solveSudoku(grid, row, col + 1))
-                    return true;
+        // Check the row
+        for(int i = 0; i < board.length; i++)
+        {
+            // Check if the number is in the row
+            if(board[row][col] == num)
+            {
+                return false;
             }
-            /* removing the assigned num , since our
-               assumption was wrong , and we go for next
-               assumption with diff num value   */
-            grid[row][col] = 0;
         }
+
+        // Check the col
+        for(int[] nums : board)
+        {
+            // Check if the number is in the col
+            if(nums[col] == num)
+            {
+                return false;
+            }
+        }
+
+        int sqrt = (int)(Math.sqrt(board.length));
+        int rowStart = row - row % sqrt;
+        int colStart = col - col % sqrt;
+
+        for(int r = rowStart; r < rowStart + sqrt; r++)
+        {
+            for(int c = colStart; c < colStart + sqrt; c++)
+            {
+                if(board[r][c] == num)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    static boolean solve(int[][] board)
+    {
+        int n = board.length;
+        int row = -1;
+        int col = -1;
+
+        boolean emptyLeft = true;
+
+        // This is how we are replacing the r, c from arguments
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(board[i][j] == 0)
+                {
+                    row = i;
+                    col = j;
+                    emptyLeft = false;
+                    break;
+                }
+            }
+
+            // if you found some empty element in row, then break
+            if(emptyLeft == false)
+            {
+                break;
+            }
+        }
+
+        if(emptyLeft == true)
+        {
+            return true;
+            // Soduko is solved
+        }
+
+        // Backtrack
+        for(int number = 1; number <= 9; number++)
+        {
+            if(isSafe(board, row, col, number))
+            {
+                board[row][col] = number;
+                if(solve(board))
+                {
+                    // Found the answer
+                    return true;
+                }
+                else
+                {
+                    // Backtrack
+                    board[row][col] = 0;
+                }
+            }
+        }
+
         return false;
     }
- 
-    /* A utility function to print grid */
-    static void print(int[][] grid)
+
+    private static void display(int[][] board)
     {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++)
-                System.out.print(grid[i][j] + " ");
+        for(int[] row : board)
+        {
+            for(int num : row)
+            {
+                System.out.print(num +" ");
+            }
+
             System.out.println();
         }
     }
- 
-    // Check whether it will be legal
-    // to assign num to the
-    // given row, col
-    static boolean isSafe(int[][] grid, int row, int col,
-                          int num)
+    public static void main(String[] args) 
     {
- 
-        // Check if we find the same num
-        // in the similar row , we
-        // return false
-        for (int x = 0; x <= 8; x++)
-            if (grid[row][x] == num)
-                return false;
- 
-        // Check if we find the same num
-        // in the similar column ,
-        // we return false
-        for (int x = 0; x <= 8; x++)
-            if (grid[x][col] == num)
-                return false;
- 
-        // Check if we find the same num
-        // in the particular 3*3
-        // matrix, we return false
-        int startRow = row - row % 3, startCol
-                                      = col - col % 3;
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++)
-                if (grid[i + startRow][j + startCol] == num)
-                    return false;
- 
-        return true;
-    }
-  
-    // Driver Code
-    public static void main(String[] args)
-    {
-        int grid[][] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
-                         { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-                         { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
-                         { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
-                         { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
-                         { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-                         { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-                         { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-                         { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
- 
-        if (solveSudoku(grid, 0, 0))
-            print(grid);
+        int[][] board = new int[][] 
+        {
+
+            {5,3,0,0,7,0,0,0,0},
+            {6,0,0,1,9,5,0,0,0},
+            {0,9,8,0,0,0,0,6,0},
+            {8,0,0,0,6,0,0,0,3},
+            {4,0,0,8,0,3,0,0,1},
+            {7,0,0,0,2,0,0,0,6},
+            {0,6,0,0,0,0,2,8,0},
+            {0,0,0,4,1,9,0,0,5},
+            {0,0,0,0,8,0,0,7,9}
+
+        };
+
+        if(solve(board))
+        {
+            display(board);
+        }
         else
-            System.out.println("No Solution exists");
+        {
+            System.out.println("Cannot solve");
+        }
     }
-    // This is code is contributed by Pradeep Mondal P
 }
