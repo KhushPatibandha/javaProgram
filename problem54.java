@@ -7,6 +7,8 @@
  * similar to problem51, problem52 and problem53
  * with rectrictions on the maze grid
  * you can go on the tile with "False" on it
+ * 
+ * *************************************
  */
 
 public class problem54 

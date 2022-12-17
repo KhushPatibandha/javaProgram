@@ -1,6 +1,7 @@
 // Rotation count 
 // Count the number of rotation in the array
 // Just find pivot and add 1 to it and that's the number of rotation
+// *******************************
 
 public class problem48 
 {

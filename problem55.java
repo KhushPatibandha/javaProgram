@@ -4,6 +4,8 @@
  * Allowed to go up, down, left, right, diagonal
  * 
  * ALl paths
+ * 
+ * *****************************
  */
 
 public class problem55 
