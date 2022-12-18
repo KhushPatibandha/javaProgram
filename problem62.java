@@ -1,3 +1,13 @@
+/*
+ * Search in BinarySearchTree(BST)
+ * 
+ * Find if the given key exist in the tree
+ * 
+ * Time complixity O(H) == O(Height)
+ * 
+ */
+
+ 
 public class problem62 
 {
     public class Node
@@ -14,7 +24,7 @@ public class problem62
         }
     }
 
-    
+
     public static void inOrder(Node root)
     {
         if(root == null)
