@@ -33,26 +33,6 @@ public class problem63
         }
     }
 
-    static class Tree
-    {
-        static int idx = -1;
-        public static Node buildTree(int nodes[])
-        {
-            problem63 bt = new problem63();
-            idx++;
-            if(nodes[idx] == -1)
-            {
-                return null;
-            }
-
-            Node newNode = bt.new Node(nodes[idx]);
-            newNode.left = buildTree(nodes);
-            newNode.right = buildTree(nodes);
-
-            return newNode;
-        }
-    }
-
     public static void inOrder(Node root)
     {
         if(root == null)

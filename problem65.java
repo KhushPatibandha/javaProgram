@@ -1,12 +1,10 @@
 /*
- * Print in Range
- * 
- * eg - x = 6 & y = 10 
- * So you have to print all the nodes which are between the value of x and y
- * 
+ * Root to leaf Paths
  */
 
-public class problem64 
+import java.util.ArrayList;
+
+public class problem65 
 {
     public class Node
     {
@@ -30,13 +28,13 @@ public class problem64
         }
 
         inOrder(root.left);
-        System.out.print(root.data +" ");
+        System.out.println(root.data +" ");
         inOrder(root.right);
     }
 
     public static Node insert(Node root, int val)
     {
-        problem64 bst = new problem64();
+        problem65 bst = new problem65();
 
         if(root == null)
         {
@@ -56,29 +54,38 @@ public class problem64
         return root;
     }
 
-    public static void printInRange(Node root, int x, int y)
+    public static void printPath(ArrayList<Integer> path)
+    {
+        for(int i = 0; i < path.size(); i++)
+        {
+            System.out.print(path.get(i) +"->");
+        }
+        System.out.println();
+    }
+
+    public static void rootToLeaf(Node root, ArrayList<Integer> path)
     {
         if(root == null)
         {
             return;
         }
 
-        if(root.data >= x && root.data <= y)
-        {
-            printInRange(root.left, x, y);
-            System.out.print(root.data +" ");
-            printInRange(root.right, x, y);
-        }
-        else if(root.data >= y)
-        {
-            printInRange(root.left, x, y);
-        }
-        else
-        {
-            printInRange(root.right, x, y);
-        }
-    }
+        path.add(root.data);
 
+        // Leaf
+        if(root.left == null && root.right == null)
+        {
+            printPath(path);
+        }
+        else // Non-leaf
+        {
+            rootToLeaf(root.left, path);
+            rootToLeaf(root.right, path);
+        }
+
+        path.remove(path.size()-1);
+    }
+    
     public static void main(String[] args) 
     {
         int[] values = {8, 5, 3, 1, 4, 6, 10, 11, 14};
@@ -89,9 +96,6 @@ public class problem64
             root = insert(root, values[i]);
         }
 
-        inOrder(root);
-        System.out.println();
-
-        printInRange(root, 3, 12);
+        rootToLeaf(root, new ArrayList<>());
     }    
 }
