@@ -1,6 +1,11 @@
 /*
  * Build a BinarySearchTree(BST)
  * Time complixity is O(H) == O(Height)
+ * 
+ * problem62 and problem63 are some application of binarySearchTree(BST) 
+ * problem62 -- find if the given key by the user exist in the binarySearchTree(BST)
+ * problem63 -- Delete a node in a BinarySearchTree(BST)
+ * 
  */
 
 
