@@ -5,6 +5,8 @@
 * Very very similar to activity selection question (problem70)
 * 
 * Approch -> just sort the end array 
+*
+* Time complixity = O(nlogn)
 * 
 */
 
