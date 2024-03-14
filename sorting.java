@@ -10,7 +10,7 @@ public class sorting
 
     public static void main(String[] args) 
     {
-        // int arr[] = {7,2,8,1,3};
+        int arr[] = {7,2,8,1,3};
         
         // bubble sort --- largest element goes to end
 

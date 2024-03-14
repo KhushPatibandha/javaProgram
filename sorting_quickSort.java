@@ -1,4 +1,4 @@
-public class sorting_quickSort 
+public class sorting_quickSort
 {   
     public static int partition(int arr[], int low, int high)
     {
